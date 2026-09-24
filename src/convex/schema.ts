@@ -48,6 +48,14 @@ const schema = defineSchema(
       passwordHash: v.optional(v.string()),
     }).index("email", ["email"]),
 
+    /** Short-lived OTP codes for the forgot-password flow. */
+    passwordResets: defineTable({
+      email: v.string(),
+      codeHash: v.string(),
+      expiresAt: v.number(),
+      used: v.boolean(),
+    }).index("by_email", ["email"]),
+
     students: defineTable({
       userId: v.id("users"),
       rollNo: v.string(),

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { useAuthActions } from "@convex-dev/auth/react";
+import { useAction, useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,7 +10,8 @@ import campus from "@/assets/campus.svg";
 import { cn } from "@/lib/utils";
 
 export default function ForgotPassword() {
-  const { signIn } = useAuthActions();
+  const requestReset = useAction(api.passwordReset.requestReset);
+  const resetPassword = useMutation(api.passwordReset.resetPassword);
   const navigate = useNavigate();
 
   const [step, setStep] = useState<"email" | "reset">("email");
@@ -21,14 +23,18 @@ export default function ForgotPassword() {
   const [info, setInfo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const requestReset = async (e: React.FormEvent) => {
+  useEffect(() => {
+    document.title = "Forgot Password · VCET Portal";
+  }, []);
+
+  const requestResetCode = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setInfo(null);
     setLoading(true);
     try {
-      await signIn("password", { flow: "reset", email });
-      setInfo(`Reset code sent to ${email}. Check your email inbox.`);
+      await requestReset({ email: email.trim() });
+      setInfo(`Reset code sent to ${email.trim()}. Check your email inbox.`);
       setStep("reset");
     } catch {
       setError("Could not send a reset code. Check the email and try again.");
@@ -42,12 +48,15 @@ export default function ForgotPassword() {
     setError(null);
     setLoading(true);
     try {
-      await signIn("password", {
-        flow: "reset-verification",
-        email,
-        code,
+      const result = await resetPassword({
+        email: email.trim(),
+        code: code.trim(),
         newPassword,
       });
+      if (!result.ok) {
+        setError(result.error ?? "Invalid or expired code.");
+        return;
+      }
       navigate("/login");
     } catch {
       setError("Invalid or expired code.");
@@ -75,11 +84,11 @@ export default function ForgotPassword() {
           <p className="mt-1 text-sm text-[#5B6B83]">
             {step === "email"
               ? "Enter your registered email and we'll send a reset code."
-              : `Enter the code sent to ${email} and choose a new password.`}
+              : `Enter the code sent to ${email.trim()} and choose a new password.`}
           </p>
 
           {step === "email" ? (
-            <form onSubmit={requestReset} className="mt-6 space-y-4">
+            <form onSubmit={requestResetCode} className="mt-6 space-y-4">
               <div className="space-y-1.5">
                 <Label htmlFor="email" className="text-[#0F2542]">
                   Email

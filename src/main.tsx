@@ -3,7 +3,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { RequireAuth } from "@/components/RequireAuth";
 import { VlyToolbar } from "../vly-toolbar-readonly.tsx";
 import { ConvexAuthProvider } from "@convex-dev/auth/react";
-import { ConvexReactClient } from "convex/react";
+import { ConvexReactClient, useMutation } from "convex/react";
+import { api } from "./convex/_generated/api";
 import React, { StrictMode, useEffect, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router";
@@ -13,7 +14,16 @@ import "./index.css";
 const Landing = lazy(() => import("./pages/Landing.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword.tsx"));
+const RegisterPage = lazy(() => import("./pages/Register.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
+const Profile = lazy(() => import("./pages/Profile.tsx"));
+const Attendance = lazy(() => import("./pages/Attendance.tsx"));
+const Circulars = lazy(() => import("./pages/Circulars.tsx"));
+const Payments = lazy(() => import("./pages/Payments.tsx"));
+const Examinations = lazy(() => import("./pages/Examinations.tsx"));
+const ELibrary = lazy(() => import("./pages/ELibrary.tsx"));
+const Extracurricular = lazy(() => import("./pages/Extracurricular.tsx"));
+const Feedback = lazy(() => import("./pages/Feedback.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 // Simple loading fallback for route transitions
@@ -85,6 +95,11 @@ const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
 function AppRoutes() {
   const location = useLocation();
+  const ensureSeeded = useMutation(api.seed.ensureSeeded);
+
+  useEffect(() => {
+    ensureSeeded().catch(() => {});
+  }, [ensureSeeded]);
 
   useEffect(() => {
     window.parent.postMessage(
@@ -113,19 +128,76 @@ function AppRoutes() {
         element={<AuthPage redirectAfterAuth="/dashboard" />}
       />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route
-        path="/register"
-        element={
-          <div className="min-h-screen bg-[#F4F7FC] p-10 text-center text-[#0B3B78]">
-            Registration page — see /login
-          </div>
-        }
-      />
+      <Route path="/register" element={<RegisterPage />} />
       <Route
         path="/dashboard"
         element={
           <RequireAuth redirectImmediately>
             <Dashboard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <RequireAuth redirectImmediately>
+            <Profile />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/attendance"
+        element={
+          <RequireAuth redirectImmediately>
+            <Attendance />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/circulars"
+        element={
+          <RequireAuth redirectImmediately>
+            <Circulars />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/payments"
+        element={
+          <RequireAuth redirectImmediately>
+            <Payments />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/examinations"
+        element={
+          <RequireAuth redirectImmediately>
+            <Examinations />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/e-library"
+        element={
+          <RequireAuth redirectImmediately>
+            <ELibrary />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/extracurricular"
+        element={
+          <RequireAuth redirectImmediately>
+            <Extracurricular />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/feedback"
+        element={
+          <RequireAuth redirectImmediately>
+            <Feedback />
           </RequireAuth>
         }
       />

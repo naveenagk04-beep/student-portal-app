@@ -3,33 +3,51 @@ import { convexAuth } from "@convex-dev/auth/server";
 import { Anonymous } from "@convex-dev/auth/providers/Anonymous";
 import { emailOtp } from "./auth/emailOtp";
 import { verifyPasswordSync } from "./passwords";
+import { internal } from "./_generated/api";
 
 /**
  * VCET credentials provider: sign in with email OR roll number + password.
- * Authenticates against the PBKDF2 hash stored on the user record.
+ * The authorize callback runs inside an ACTION context, so DB access goes
+ * through ctx.runQuery / ctx.runMutation against the `account` module.
  */
 const vcetCredentials = ConvexCredentials({
   id: "password",
   authorize: async (params, ctx) => {
-    const identifier = String(params.email ?? "").toLowerCase().trim();
+    const rawEmail = String(params.email ?? "").toLowerCase().trim();
     const password = String(params.password ?? "");
-    if (!identifier || !password) {
+    const flow = String(params.flow ?? "signIn");
+
+    if (!rawEmail || !password) {
       throw new Error("Missing credentials");
     }
 
-    const users = await ctx.db.query("users").collect();
-    const user = users.find(
-      (u) => (u.email ?? "").toLowerCase() === identifier,
-    );
+    if (flow === "signUp") {
+      const userId = await ctx.runMutation(internal.account.createStudentAccount, {
+        email: rawEmail,
+        password,
+        name: String(params.name ?? ""),
+        phone: String(params.phone ?? ""),
+        rollNo: String(params.rollNo ?? "").toUpperCase(),
+        year: String(params.year ?? ""),
+        department: String(params.department ?? ""),
+      });
+      return { userId };
+    }
 
+    // Default: sign in. Accepts a raw email or a roll number; roll numbers
+    // are mapped to their @vcet.edu.in address on the client, but we also
+    // resolve them here as a fallback.
+    let email = rawEmail;
+    const user = await ctx.runQuery(internal.account.findByEmailOrRoll, {
+      identifier: rawEmail,
+    });
     if (!user) throw new Error("Invalid credentials");
 
-    const storedHash = (user as unknown as { passwordHash?: string })
-      .passwordHash;
-    if (!storedHash) throw new Error("Invalid credentials");
-    const ok = verifyPasswordSync(password, storedHash);
-    if (!ok) throw new Error("Invalid credentials");
-
+    email = user.email ?? rawEmail;
+    const storedHash = user.passwordHash;
+    if (!storedHash || !verifyPasswordSync(password, storedHash)) {
+      throw new Error("Invalid credentials");
+    }
     return { userId: user._id };
   },
 });

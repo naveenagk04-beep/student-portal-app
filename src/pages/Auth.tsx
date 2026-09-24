@@ -173,7 +173,7 @@ export function AuthForm({ redirectAfterAuth }: { redirectAfterAuth?: string }) 
                 to="/register"
                 className="font-semibold text-[#0B3B78] hover:underline"
               >
-                Sign In
+                Create an account
               </Link>
             </p>
 
