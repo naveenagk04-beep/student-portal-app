@@ -20,7 +20,7 @@ export default function Profile() {
   const viewer = useQuery(api.portal.getViewer, {});
   const updateProfile = useMutation(api.portal.updateProfile);
   const uploadAvatar = useAction(api.supabaseStorage.uploadFile);
-  const storageStatus = useQuery(api.supabaseStorage.storageStatus);
+  const storageStatus = useQuery(api.supabaseStatus.storageStatus);
 
   const [name, setName] = useState<string | null>(null);
   const [phone, setPhone] = useState<string | null>(null);
