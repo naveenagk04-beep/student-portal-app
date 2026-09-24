@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Loader2, Lock, User } from "lucide-react";
-import campus from "@/assets/campus.svg";
+import { vcetCampus } from "@/lib/vcet-assets";
 import { VcetLogo } from "@/components/vcet/VcetLogo";
 
 export default function AuthPage({
@@ -63,7 +63,7 @@ export function AuthForm({ redirectAfterAuth }: { redirectAfterAuth?: string }) 
     <div className="relative min-h-screen bg-[#F4F7FC]">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${campus})` }}
+        style={{ backgroundImage: `url(${vcetCampus()})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#06244A]/60 via-[#06244A]/30 to-[#06244A]/10" />
 

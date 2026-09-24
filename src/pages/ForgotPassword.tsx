@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, KeyRound, Loader2, Lock, Mail } from "lucide-react";
-import campus from "@/assets/campus.svg";
+import { vcetCampus } from "@/lib/vcet-assets";
 import { cn } from "@/lib/utils";
 
 export default function ForgotPassword() {
@@ -72,7 +72,7 @@ export default function ForgotPassword() {
     <div className="relative min-h-screen bg-[#F4F7FC]">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${campus})` }}
+        style={{ backgroundImage: `url(${vcetCampus()})` }}
       />
       <div className="absolute inset-0 bg-[#06244A]/40" />
 

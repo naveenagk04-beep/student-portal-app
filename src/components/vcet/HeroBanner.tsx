@@ -1,4 +1,4 @@
-import campus from "@/assets/campus.svg";
+import { vcetCampus } from "@/lib/vcet-assets";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
@@ -15,7 +15,7 @@ export function HeroBanner({
     <section
       className="relative overflow-hidden rounded-2xl"
       style={{
-        backgroundImage: `linear-gradient(90deg, rgba(6,36,74,0.82) 0%, rgba(6,36,74,0.45) 45%, rgba(6,36,74,0.15) 100%), url(${campus})`,
+        backgroundImage: `linear-gradient(90deg, rgba(6,36,74,0.82) 0%, rgba(6,36,74,0.45) 45%, rgba(6,36,74,0.15) 100%), url(${vcetCampus()})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

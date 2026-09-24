@@ -1,51 +1,133 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#8FC3EF"/>
-      <stop offset="1" stop-color="#D9ECFA"/>
+      <stop offset="0" stop-color="#7FB6E8"/>
+      <stop offset="0.65" stop-color="#BAD7F0"/>
+      <stop offset="1" stop-color="#E6F1F9"/>
     </linearGradient>
-    <linearGradient id="bldg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F3F4F0"/>
-      <stop offset="1" stop-color="#E4E6DF"/>
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E9F2F9"/>
     </linearGradient>
-    <linearGradient id="bldg2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#E08A4C"/>
-      <stop offset="1" stop-color="#C97B3F"/>
+    <linearGradient id="wingOrange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8963F"/>
+      <stop offset="1" stop-color="#D98530"/>
     </linearGradient>
-    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#6FA85A"/>
-      <stop offset="1" stop-color="#4E8A3E"/>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#BCD3E4"/>
+      <stop offset="1" stop-color="#9DBDD4"/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="400" fill="url(#sky)"/>
-  <ellipse cx="300" cy="90" rx="90" ry="26" fill="#FFFFFF" opacity="0.85"/>
-  <ellipse cx="380" cy="105" rx="70" ry="20" fill="#FFFFFF" opacity="0.7"/>
-  <ellipse cx="950" cy="70" rx="110" ry="30" fill="#FFFFFF" opacity="0.8"/>
-  <rect x="80" y="140" width="380" height="200" fill="url(#bldg)"/>
-  <rect x="80" y="140" width="380" height="14" fill="#C9CBC4"/>
-  <g fill="#B8C4D6">
-    <rect x="100" y="170" width="26" height="20"/><rect x="150" y="170" width="26" height="20"/><rect x="200" y="170" width="26" height="20"/><rect x="250" y="170" width="26" height="20"/><rect x="300" y="170" width="26" height="20"/><rect x="350" y="170" width="26" height="20"/><rect x="400" y="170" width="26" height="20"/><rect x="430" y="170" width="26" height="20"/>
-    <rect x="100" y="210" width="26" height="20"/><rect x="150" y="210" width="26" height="20"/><rect x="200" y="210" width="26" height="20"/><rect x="250" y="210" width="26" height="20"/><rect x="300" y="210" width="26" height="20"/><rect x="350" y="210" width="26" height="20"/><rect x="400" y="210" width="26" height="20"/><rect x="430" y="210" width="26" height="20"/>
-    <rect x="100" y="250" width="26" height="20"/><rect x="150" y="250" width="26" height="20"/><rect x="200" y="250" width="26" height="20"/><rect x="250" y="250" width="26" height="20"/><rect x="300" y="250" width="26" height="20"/><rect x="350" y="250" width="26" height="20"/><rect x="400" y="250" width="26" height="20"/><rect x="430" y="250" width="26" height="20"/>
+
+  <rect width="1200" height="420" fill="url(#sky)"/>
+
+  <!-- clouds -->
+  <g fill="url(#cloud)">
+    <ellipse cx="180" cy="60" rx="120" ry="30" opacity="0.9"/>
+    <ellipse cx="300" cy="80" rx="90" ry="22" opacity="0.7"/>
+    <ellipse cx="950" cy="55" rx="140" ry="32" opacity="0.9"/>
+    <ellipse cx="1080" cy="85" rx="90" ry="24" opacity="0.7"/>
   </g>
-  <rect x="460" y="120" width="90" height="220" fill="url(#bldg2)"/>
-  <rect x="550" y="100" width="330" height="240" fill="url(#bldg)"/>
-  <rect x="550" y="100" width="330" height="12" fill="#C9CBC4"/>
-  <g fill="#B8C4D6">
-    <rect x="570" y="130" width="24" height="18"/><rect x="610" y="130" width="24" height="18"/><rect x="650" y="130" width="24" height="18"/><rect x="690" y="130" width="24" height="18"/><rect x="730" y="130" width="24" height="18"/><rect x="770" y="130" width="24" height="18"/><rect x="810" y="130" width="24" height="18"/><rect x="850" y="130" width="24" height="18"/>
-    <rect x="570" y="165" width="24" height="18"/><rect x="610" y="165" width="24" height="18"/><rect x="650" y="165" width="24" height="18"/><rect x="690" y="165" width="24" height="18"/><rect x="730" y="165" width="24" height="18"/><rect x="770" y="165" width="24" height="18"/><rect x="810" y="165" width="24" height="18"/><rect x="850" y="165" width="24" height="18"/>
-    <rect x="570" y="200" width="24" height="18"/><rect x="610" y="200" width="24" height="18"/><rect x="650" y="200" width="24" height="18"/><rect x="690" y="200" width="24" height="18"/><rect x="730" y="200" width="24" height="18"/><rect x="770" y="200" width="24" height="18"/><rect x="810" y="200" width="24" height="18"/><rect x="850" y="200" width="24" height="18"/>
-    <rect x="570" y="235" width="24" height="18"/><rect x="610" y="235" width="24" height="18"/><rect x="650" y="235" width="24" height="18"/><rect x="690" y="235" width="24" height="18"/><rect x="730" y="235" width="24" height="18"/><rect x="770" y="235" width="24" height="18"/><rect x="810" y="235" width="24" height="18"/><rect x="850" y="235" width="24" height="18"/>
-    <rect x="570" y="270" width="24" height="18"/><rect x="610" y="270" width="24" height="18"/><rect x="650" y="270" width="24" height="18"/><rect x="690" y="270" width="24" height="18"/><rect x="730" y="270" width="24" height="18"/><rect x="770" y="270" width="24" height="18"/><rect x="810" y="270" width="24" height="18"/><rect x="850" y="270" width="24" height="18"/>
+
+  <!-- foreground trees (left) -->
+  <g>
+    <rect x="52" y="240" width="8" height="150" fill="#6B4A2E"/>
+    <g fill="#3F7D3A">
+      <ellipse cx="56" cy="150" rx="64" ry="34"/>
+      <ellipse cx="24" cy="188" rx="42" ry="22"/>
+      <ellipse cx="92" cy="192" rx="42" ry="22"/>
+    </g>
+    <g fill="#356B32" opacity="0.85">
+      <ellipse cx="70" cy="168" rx="40" ry="20"/>
+    </g>
+    <path d="M150 320 q14 -70 4 -120 q-8 -40 12 -66" stroke="#6B4A2E" stroke-width="7" fill="none"/>
+    <g fill="#4E8A47">
+      <ellipse cx="160" cy="130" rx="34" ry="12" transform="rotate(-30 160 130)"/>
+      <ellipse cx="180" cy="150" rx="34" ry="12" transform="rotate(20 180 150)"/>
+      <ellipse cx="150" cy="165" rx="34" ry="12" transform="rotate(70 150 165)"/>
+    </g>
   </g>
-  <rect x="880" y="130" width="80" height="210" fill="url(#bldg2)"/>
-  <rect x="960" y="150" width="200" height="190" fill="url(#bldg)"/>
-  <g fill="#B8C4D6">
-    <rect x="980" y="170" width="26" height="20"/><rect x="1030" y="170" width="26" height="20"/><rect x="1080" y="170" width="26" height="20"/>
-    <rect x="980" y="210" width="26" height="20"/><rect x="1030" y="210" width="26" height="20"/><rect x="1080" y="210" width="26" height="20"/>
-    <rect x="980" y="250" width="26" height="20"/><rect x="1030" y="250" width="26" height="20"/><rect x="1080" y="250" width="26" height="20"/>
+
+  <!-- main academic block (center-left, 5 storeys) -->
+  <g>
+    <rect x="250" y="120" width="420" height="240" fill="#F2F1EC"/>
+    <rect x="250" y="112" width="420" height="10" fill="#DDDCD4"/>
+    <!-- orange vertical wings -->
+    <g fill="url(#wingOrange)">
+      <rect x="262" y="128" width="44" height="232"/>
+      <rect x="330" y="128" width="44" height="232"/>
+      <rect x="398" y="128" width="44" height="232"/>
+      <rect x="466" y="128" width="44" height="232"/>
+      <rect x="534" y="128" width="44" height="232"/>
+      <rect x="602" y="128" width="44" height="232"/>
+    </g>
+    <!-- windows between wings -->
+    <g fill="url(#glass)" stroke="#8FA9BD" stroke-width="1.5">
+      <!-- rows at y=150,200,250,300 -->
+      <rect x="312" y="150" width="12" height="26"/><rect x="380" y="150" width="12" height="26"/><rect x="448" y="150" width="12" height="26"/><rect x="516" y="150" width="12" height="26"/><rect x="584" y="150" width="12" height="26"/>
+      <rect x="312" y="200" width="12" height="26"/><rect x="380" y="200" width="12" height="26"/><rect x="448" y="200" width="12" height="26"/><rect x="516" y="200" width="12" height="26"/><rect x="584" y="200" width="12" height="26"/>
+      <rect x="312" y="250" width="12" height="26"/><rect x="380" y="250" width="12" height="26"/><rect x="448" y="250" width="12" height="26"/><rect x="516" y="250" width="12" height="26"/><rect x="584" y="250" width="12" height="26"/>
+      <rect x="312" y="300" width="12" height="26"/><rect x="380" y="300" width="12" height="26"/><rect x="448" y="300" width="12" height="26"/><rect x="516" y="300" width="12" height="26"/><rect x="584" y="300" width="12" height="26"/>
+      <!-- windows on wings -->
+      <rect x="272" y="150" width="24" height="26"/><rect x="340" y="150" width="24" height="26"/><rect x="408" y="150" width="24" height="26"/><rect x="476" y="150" width="24" height="26"/><rect x="544" y="150" width="24" height="26"/><rect x="612" y="150" width="24" height="26"/>
+      <rect x="272" y="200" width="24" height="26"/><rect x="340" y="200" width="24" height="26"/><rect x="408" y="200" width="24" height="26"/><rect x="476" y="200" width="24" height="26"/><rect x="544" y="200" width="24" height="26"/><rect x="612" y="200" width="24" height="26"/>
+      <rect x="272" y="250" width="24" height="26"/><rect x="340" y="250" width="24" height="26"/><rect x="408" y="250" width="24" height="26"/><rect x="476" y="250" width="24" height="26"/><rect x="544" y="250" width="24" height="26"/><rect x="612" y="250" width="24" height="26"/>
+      <rect x="272" y="300" width="24" height="26"/><rect x="340" y="300" width="24" height="26"/><rect x="408" y="300" width="24" height="26"/><rect x="476" y="300" width="24" height="26"/><rect x="544" y="300" width="24" height="26"/><rect x="612" y="300" width="24" height="26"/>
+    </g>
+    <!-- entrance -->
+    <rect x="430" y="308" width="80" height="52" fill="#5B6B83"/>
+    <rect x="436" y="316" width="30" height="44" fill="#BCD3E4"/>
+    <rect x="474" y="316" width="30" height="44" fill="#BCD3E4"/>
   </g>
-  <ellipse cx="60" cy="380" rx="120" ry="70" fill="url(#green)"/>
-  <ellipse cx="1180" cy="390" rx="150" ry="80" fill="url(#green)"/>
-  <ellipse cx="600" cy="405" rx="500" ry="40" fill="#7FB765"/>
+
+  <!-- taller corner tower (center-right, 7 storeys, orange wings) -->
+  <g>
+    <rect x="680" y="70" width="220" height="290" fill="#EFEDE7"/>
+    <rect x="680" y="62" width="220" height="10" fill="#DDDCD4"/>
+    <g fill="url(#wingOrange)">
+      <rect x="692" y="78" width="42" height="282"/>
+      <rect x="778" y="78" width="42" height="282"/>
+      <rect x="848" y="78" width="42" height="282"/>
+    </g>
+    <g fill="url(#glass)" stroke="#8FA9BD" stroke-width="1.5">
+      <rect x="740" y="100" width="30" height="24"/><rect x="740" y="145" width="30" height="24"/><rect x="740" y="190" width="30" height="24"/><rect x="740" y="235" width="30" height="24"/><rect x="740" y="280" width="30" height="24"/><rect x="740" y="325" width="30" height="24"/>
+      <rect x="700" y="100" width="26" height="24"/><rect x="786" y="100" width="26" height="24"/><rect x="856" y="100" width="26" height="24"/>
+      <rect x="700" y="145" width="26" height="24"/><rect x="786" y="145" width="26" height="24"/><rect x="856" y="145" width="26" height="24"/>
+      <rect x="700" y="190" width="26" height="24"/><rect x="786" y="190" width="26" height="24"/><rect x="856" y="190" width="26" height="24"/>
+      <rect x="700" y="235" width="26" height="24"/><rect x="786" y="235" width="26" height="24"/><rect x="856" y="235" width="26" height="24"/>
+      <rect x="700" y="280" width="26" height="24"/><rect x="786" y="280" width="26" height="24"/><rect x="856" y="280" width="26" height="24"/>
+      <rect x="700" y="325" width="26" height="24"/><rect x="786" y="325" width="26" height="24"/><rect x="856" y="325" width="26" height="24"/>
+    </g>
+  </g>
+
+  <!-- right low block -->
+  <g>
+    <rect x="910" y="200" width="220" height="160" fill="#F2F1EC"/>
+    <rect x="910" y="192" width="220" height="10" fill="#DDDCD4"/>
+    <g fill="url(#wingOrange)">
+      <rect x="920" y="208" width="38" height="152"/>
+      <rect x="996" y="208" width="38" height="152"/>
+      <rect x="1072" y="208" width="38" height="152"/>
+    </g>
+    <g fill="url(#glass)" stroke="#8FA9BD" stroke-width="1.5">
+      <rect x="964" y="225" width="24" height="22"/><rect x="1040" y="225" width="24" height="22"/><rect x="1116" y="225" width="8" height="22"/>
+      <rect x="964" y="265" width="24" height="22"/><rect x="1040" y="265" width="24" height="22"/><rect x="1116" y="265" width="8" height="22"/>
+      <rect x="964" y="305" width="24" height="22"/><rect x="1040" y="305" width="24" height="22"/><rect x="1116" y="305" width="8" height="22"/>
+    </g>
+  </g>
+
+  <!-- trees right -->
+  <g fill="#3F7D3A">
+    <ellipse cx="880" cy="330" rx="42" ry="22"/>
+    <ellipse cx="925" cy="345" rx="36" ry="18"/>
+    <ellipse cx="1150" cy="335" rx="55" ry="26"/>
+  </g>
+  <g fill="#356B32">
+    <ellipse cx="900" cy="345" rx="30" ry="14"/>
+    <ellipse cx="1160" cy="350" rx="36" ry="16"/>
+  </g>
+
+  <!-- lawn -->
+  <path d="M0 400 Q300 372 620 392 T1200 384 V420 H0 Z" fill="#6FA85A"/>
+  <path d="M0 412 Q320 392 640 406 T1200 400 V420 H0 Z" fill="#5E9449"/>
 </svg>

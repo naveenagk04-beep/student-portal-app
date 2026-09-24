@@ -11,7 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import { Link } from "react-router";
-import campus from "@/assets/campus.svg";
+import { vcetCampus } from "@/lib/vcet-assets";
 import { VcetLogo } from "@/components/vcet/VcetLogo";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
@@ -111,7 +111,7 @@ export default function Landing() {
       <section
         className="relative overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(90deg, rgba(6,36,74,0.88) 0%, rgba(6,36,74,0.55) 50%, rgba(6,36,74,0.25) 100%), url(${campus})`,
+          backgroundImage: `linear-gradient(90deg, rgba(6,36,74,0.88) 0%, rgba(6,36,74,0.55) 50%, rgba(6,36,74,0.25) 100%), url(${vcetCampus()})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -210,7 +210,7 @@ export default function Landing() {
           <div className="grid md:grid-cols-2">
             <div
               className="min-h-[260px] bg-cover bg-center"
-              style={{ backgroundImage: `url(${campus})` }}
+              style={{ backgroundImage: `url(${vcetCampus()})` }}
             />
             <div className="flex flex-col justify-center p-8 md:p-10">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#5BAA3C]">

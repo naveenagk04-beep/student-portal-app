@@ -37,7 +37,7 @@ import {
   Phone,
   User,
 } from "lucide-react";
-import campus from "@/assets/campus.svg";
+import { vcetCampus, vcetLogo } from "@/lib/vcet-assets";
 import { VcetLogo } from "@/components/vcet/VcetLogo";
 
 const YEARS = ["1", "2", "3", "4"];
@@ -177,14 +177,14 @@ export default function Register() {
     <div className="relative min-h-screen bg-[#F4F7FC]">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${campus})` }}
+        style={{ backgroundImage: `url(${vcetCampus()})` }}
       />
       <div className="absolute inset-0 bg-[#06244A]/35" />
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-4 py-10">
         <div className="mb-6 text-center">
           <div className="inline-flex items-center gap-2.5 rounded-full bg-white/95 px-4 py-2 shadow-sm">
-            <img src="/logo.svg" alt="VCET logo" className="size-8 rounded" />
+            <img src={vcetLogo()} alt="VCET logo" className="size-8 rounded" />
             <div className="text-left leading-none">
               <span className="block text-base font-extrabold text-[#0B3B78]">VCET</span>
               <span className="text-[9px] font-medium text-[#5B6B83]">

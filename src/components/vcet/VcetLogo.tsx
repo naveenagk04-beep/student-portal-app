@@ -1,4 +1,4 @@
-import logo from "@/assets/logo.svg";
+import { vcetLogo } from "@/lib/vcet-assets";
 import { cn } from "@/lib/utils";
 
 /** Small VCET logo lockup used across the portal. */
@@ -14,7 +14,7 @@ export function VcetLogo({
   return (
     <div className={cn("flex items-center gap-2.5", className)}>
       <img
-        src={logo}
+        src={vcetLogo()}
         alt="VCET logo"
         width={size}
         height={size}
