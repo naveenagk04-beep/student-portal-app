@@ -9,18 +9,22 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { api } from "@/convex/_generated/api";
-import { useMutation, useQuery } from "convex/react";
+import { useAction, useMutation, useQuery } from "convex/react";
 import { useAuth } from "@/hooks/use-auth";
-import { Mail, Phone, Save, Hash, GraduationCap, Building2 } from "lucide-react";
+import { Mail, Phone, Save, Hash, GraduationCap, Building2, Camera, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export default function Profile() {
   const { user } = useAuth();
   const viewer = useQuery(api.portal.getViewer, {});
   const updateProfile = useMutation(api.portal.updateProfile);
+  const uploadAvatar = useAction(api.supabaseStorage.uploadFile);
+  const storageStatus = useQuery(api.supabaseStorage.storageStatus);
 
   const [name, setName] = useState<string | null>(null);
   const [phone, setPhone] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   if (viewer === undefined) {
     return (
@@ -43,16 +47,77 @@ export default function Profile() {
         {/* Header card */}
         <Card className="vcet-card border-[#E5EAF2] shadow-none">
           <CardContent className="flex items-center gap-5 p-6">
-            <Avatar className="size-20 border-2 border-[#EAF2FC]">
-              <AvatarImage src={viewer?.user.image ?? undefined} alt={currentName} />
-              <AvatarFallback className="bg-[#0B3B78] text-xl font-semibold text-white">
-                {currentName
-                  .split(" ")
-                  .map((p: string) => p[0])
-                  .slice(0, 2)
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
+            <div className="relative shrink-0">
+              <Avatar className="size-20 border-2 border-[#EAF2FC]">
+                <AvatarImage src={viewer?.user.image ?? undefined} alt={currentName} />
+                <AvatarFallback className="bg-[#0B3B78] text-xl font-semibold text-white">
+                  {currentName
+                    .split(" ")
+                    .map((p: string) => p[0])
+                    .slice(0, 2)
+                    .join("")}
+                </AvatarFallback>
+              </Avatar>
+              <label
+                className={cn(
+                  "absolute -bottom-1 -right-1 flex size-7 cursor-pointer items-center justify-center rounded-full bg-[#0B3B78] text-white shadow-md transition-colors hover:bg-[#08315F]",
+                  (uploading || storageStatus && !storageStatus.configured) &&
+                    "cursor-not-allowed opacity-60",
+                )}
+                title={
+                  storageStatus && !storageStatus.configured
+                    ? "Storage not configured — ask the admin to add Supabase keys"
+                    : "Upload photo"
+                }
+              >
+                {uploading ? (
+                  <Loader2 className="size-3.5 animate-spin" />
+                ) : (
+                  <Camera className="size-3.5" />
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  disabled={uploading}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    e.target.value = ""; // allow re-picking the same file
+                    if (!file) return;
+                    if (file.size > 2 * 1024 * 1024) {
+                      toast.error("Image is too large. Maximum size is 2 MB.");
+                      return;
+                    }
+                    setUploading(true);
+                    try {
+                      const base64 = await new Promise<string>((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                          const result = String(reader.result);
+                          resolve(result.slice(result.indexOf(",") + 1));
+                        };
+                        reader.onerror = () => reject(reader.error);
+                        reader.readAsDataURL(file);
+                      });
+                      const res = await uploadAvatar({
+                        folder: "avatars",
+                        filename: file.name,
+                        contentType: file.type || "image/jpeg",
+                        base64,
+                      });
+                      await updateProfile({ image: res.url });
+                      toast.success("Profile photo updated");
+                    } catch (err) {
+                      toast.error(
+                        err instanceof Error ? err.message : "Upload failed. Try again.",
+                      );
+                    } finally {
+                      setUploading(false);
+                    }
+                  }}
+                />
+              </label>
+            </div>
             <div className="min-w-0 flex-1">
               <h1 className="truncate text-xl font-bold text-[#0F2542]">
                 {currentName || "Student"}

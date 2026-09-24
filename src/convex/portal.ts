@@ -284,12 +284,14 @@ export const updateProfile = mutation({
   args: {
     name: v.optional(v.string()),
     phone: v.optional(v.string()),
+    image: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const user = await requireAuthUser(ctx);
     const patch: Record<string, string> = {};
     if (args.name !== undefined) patch.name = args.name;
     if (args.phone !== undefined) patch.phone = args.phone;
+    if (args.image !== undefined) patch.image = args.image;
     if (Object.keys(patch).length > 0) {
       await ctx.db.patch(user._id, patch);
     }
