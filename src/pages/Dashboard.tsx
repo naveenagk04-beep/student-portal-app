@@ -167,7 +167,7 @@ export default function Dashboard() {
               {d.schedule.length === 0 && (
                 <p className="text-sm text-[#5B6B83]">No classes scheduled today.</p>
               )}
-              {d.schedule.map((s: any) => (
+              {d.schedule.map((s) => (
                 <div key={s._id} className="flex items-center gap-3">
                   <span className="size-2 shrink-0 rounded-full bg-[#0B3B78]" />
                   <span className="w-[86px] shrink-0 text-xs font-medium text-[#5B6B83]">
@@ -201,7 +201,7 @@ export default function Dashboard() {
               {d.events.length === 0 && (
                 <p className="text-sm text-[#5B6B83]">No upcoming events.</p>
               )}
-              {d.events.map((e: any) => (
+              {d.events.map((e) => (
                 <Link
                   key={e._id}
                   to="/examinations"
@@ -233,7 +233,7 @@ export default function Dashboard() {
               {d.reminders.length === 0 && (
                 <p className="text-sm text-[#5B6B83]">No open reminders.</p>
               )}
-              {d.reminders.map((r: any) => (
+              {d.reminders.map((r) => (
                 <div key={r._id} className="flex items-center gap-3">
                   <span
                     className={cn(

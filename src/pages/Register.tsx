@@ -38,7 +38,6 @@ import {
   User,
 } from "lucide-react";
 import { vcetCampus, vcetLogo } from "@/lib/vcet-assets";
-import { VcetLogo } from "@/components/vcet/VcetLogo";
 
 const YEARS = ["1", "2", "3", "4"];
 const DEPARTMENTS = ["CSE", "ECE", "EEE", "MECH", "CIVIL", "IT"];

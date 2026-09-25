@@ -37,13 +37,11 @@ const vcetCredentials = ConvexCredentials({
     // Default: sign in. Accepts a raw email or a roll number; roll numbers
     // are mapped to their @vcet.edu.in address on the client, but we also
     // resolve them here as a fallback.
-    let email = rawEmail;
     const user = await ctx.runQuery(internal.account.findByEmailOrRoll, {
       identifier: rawEmail,
     });
     if (!user) throw new Error("Invalid credentials");
 
-    email = user.email ?? rawEmail;
     const storedHash = user.passwordHash;
     if (!storedHash || !verifyPasswordSync(password, storedHash)) {
       throw new Error("Invalid credentials");

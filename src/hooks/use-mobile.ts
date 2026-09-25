@@ -11,8 +11,13 @@ export function useIsMobile() {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     }
     mql.addEventListener("change", onChange)
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
-    return () => mql.removeEventListener("change", onChange)
+    // Subscribe first, then sync initial value asynchronously so we don't
+    // call setState synchronously inside the effect body.
+    const raf = requestAnimationFrame(() => onChange())
+    return () => {
+      cancelAnimationFrame(raf)
+      mql.removeEventListener("change", onChange)
+    }
   }, [])
 
   return !!isMobile

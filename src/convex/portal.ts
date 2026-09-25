@@ -1,15 +1,20 @@
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { v } from "convex/values";
-import { query, mutation, QueryCtx } from "./_generated/server";
+import {
+  query,
+  mutation,
+  QueryCtx,
+} from "./_generated/server";
+import type { Doc, Id } from "./_generated/dataModel";
 import { internal } from "./_generated/api";
 
 /* ---------- Viewer resolution ---------- */
 
 export interface Viewer {
   kind: "student" | "parent" | "admin" | "none";
-  userId: any;
-  user: any;
-  student: any | null;
+  userId: Id<"users"> | null;
+  user: Doc<"users"> | null;
+  student: Doc<"students"> | null;
 }
 
 async function resolveViewer(ctx: QueryCtx): Promise<Viewer> {
@@ -25,13 +30,15 @@ async function resolveViewer(ctx: QueryCtx): Promise<Viewer> {
       .query("studentParents")
       .withIndex("by_parent_user", (q) => q.eq("parentUserId", userId))
       .first();
-    const student = link ? await ctx.db.get(link.studentId) : null;
+    const student: Doc<"students"> | null = link
+      ? await ctx.db.get(link.studentId)
+      : null;
     return { kind: "parent", userId, user, student };
   }
   if (portalRole === "admin") {
     return { kind: "admin", userId, user, student: null };
   }
-  const student = await ctx.db
+  const student: Doc<"students"> | null = await ctx.db
     .query("students")
     .withIndex("by_user", (q) => q.eq("userId", userId))
     .first();
@@ -39,7 +46,9 @@ async function resolveViewer(ctx: QueryCtx): Promise<Viewer> {
 }
 
 /** The student whose data the viewer may see (own for students, linked child for parents). */
-export async function visibleStudent(ctx: QueryCtx): Promise<any | null> {
+export async function visibleStudent(
+  ctx: QueryCtx,
+): Promise<Doc<"students"> | null> {
   const viewer = await resolveViewer(ctx);
   return viewer.student;
 }
@@ -70,7 +79,7 @@ export const getViewer = query({
   args: {},
   handler: async (ctx) => {
     const viewer = await resolveViewer(ctx);
-    if (viewer.kind === "none") return null;
+    if (viewer.kind === "none" || !viewer.user) return null;
     return {
       kind: viewer.kind,
       user: {

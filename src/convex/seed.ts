@@ -1,4 +1,6 @@
 import { internalMutation, mutation } from "./_generated/server";
+import type { MutationCtx } from "./_generated/server";
+import type { Id } from "./_generated/dataModel";
 import { internal } from "./_generated/api";
 import { seedData } from "./seedData";
 import { hashPasswordSync } from "./passwords";
@@ -252,7 +254,7 @@ function seedAvatar(name: string): string {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
 
-async function seedAttendanceForStudent(ctx: any, studentId: any) {
+async function seedAttendanceForStudent(ctx: MutationCtx, studentId: Id<"students">) {
   // 23 present / 25 total => 92%
   const subjects = ["Mathematics", "Data Structures", "English", "Operating Systems"];
   const total = 25;

@@ -1,6 +1,5 @@
 import { VcetLogo } from "@/components/vcet/VcetLogo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -166,7 +165,7 @@ function GlobalSearch() {
             <>
               {results.pages.length > 0 && (
                 <SearchGroup label="Pages">
-                  {results.pages.map((p: any) => (
+                  {results.pages.map((p: { path: string; label: string }) => (
                     <button
                       key={p.path}
                       onClick={() => go(p.path)}
@@ -174,12 +173,13 @@ function GlobalSearch() {
                     >
                       {p.label}
                     </button>
-                  ))}
+                  )))}
                 </SearchGroup>
               )}
               {results.circulars.length > 0 && (
                 <SearchGroup label="Circulars">
-                  {results.circulars.map((c: any) => (
+                  {results.circulars.map(
+                    (c: { _id: string; title: string; category: string }) => (
                     <button
                       key={c._id}
                       onClick={() => go("/circulars")}
@@ -190,12 +190,13 @@ function GlobalSearch() {
                         {c.category}
                       </span>
                     </button>
-                  ))}
+                  )))}
                 </SearchGroup>
               )}
               {results.events.length > 0 && (
                 <SearchGroup label="Events">
-                  {results.events.map((e: any) => (
+                  {results.events.map(
+                    (e: { _id: string; title: string; date: string }) => (
                     <button
                       key={e._id}
                       onClick={() => go("/dashboard")}
@@ -206,12 +207,13 @@ function GlobalSearch() {
                         {e.date}
                       </span>
                     </button>
-                  ))}
+                  )))}
                 </SearchGroup>
               )}
               {results.library.length > 0 && (
                 <SearchGroup label="Library">
-                  {results.library.map((l: any) => (
+                  {results.library.map(
+                    (l: { _id: string; title: string; author: string }) => (
                     <button
                       key={l._id}
                       onClick={() => go("/e-library")}
@@ -222,7 +224,7 @@ function GlobalSearch() {
                         {l.author}
                       </span>
                     </button>
-                  ))}
+                  )))}
                 </SearchGroup>
               )}
             </>
@@ -319,18 +321,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const viewer = useQuery(api.portal.getViewer, {});
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname]);
 
   const isParentView = viewer?.kind === "parent";
   const displayName =
     viewer?.student?.name ?? user?.name ?? "Student";
-  const subtitle = isParentView
-    ? `Parent of ${viewer?.student?.name ?? "student"}`
-    : (viewer?.student?.program ?? user?.email ?? "Student");
 
   const handleSignOut = async () => {
     await signOut();
