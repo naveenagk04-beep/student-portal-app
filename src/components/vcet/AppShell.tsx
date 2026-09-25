@@ -173,7 +173,7 @@ function GlobalSearch() {
                     >
                       {p.label}
                     </button>
-                  )))}
+                  ))}
                 </SearchGroup>
               )}
               {results.circulars.length > 0 && (
@@ -190,7 +190,7 @@ function GlobalSearch() {
                         {c.category}
                       </span>
                     </button>
-                  )))}
+                  ))}
                 </SearchGroup>
               )}
               {results.events.length > 0 && (
@@ -207,7 +207,7 @@ function GlobalSearch() {
                         {e.date}
                       </span>
                     </button>
-                  )))}
+                  ))}
                 </SearchGroup>
               )}
               {results.library.length > 0 && (
@@ -224,7 +224,7 @@ function GlobalSearch() {
                         {l.author}
                       </span>
                     </button>
-                  )))}
+                  ))}
                 </SearchGroup>
               )}
             </>
