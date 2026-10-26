@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Loader2, Lock, User } from "lucide-react";
 import { vcetCampus } from "@/lib/vcet-assets";
 import { VcetLogo } from "@/components/vcet/VcetLogo";
+import { COLLEGE } from "@/lib/college";
 
 export default function AuthPage({
   redirectAfterAuth,
@@ -43,7 +44,7 @@ export function AuthForm({ redirectAfterAuth }: { redirectAfterAuth?: string }) 
     try {
       const email = id.includes("@")
         ? id.toLowerCase()
-        : `${id.replace(/\s+/g, "").toLowerCase()}@vcet.edu.in`;
+        : `${id.replace(/\s+/g, "").toLowerCase()}@${COLLEGE.emailDomain}`;
       await signIn("password", { email, password, flow: "signIn" });
       navigate(redirectAfterAuth ?? "/dashboard");
     } catch (err) {
@@ -83,7 +84,7 @@ export function AuthForm({ redirectAfterAuth }: { redirectAfterAuth?: string }) 
           <div className="vcet-card w-full max-w-md p-8">
             <h1 className="text-2xl font-bold text-[#0F2542]">Student Login</h1>
             <p className="mt-1 text-sm text-[#5B6B83]">
-              Welcome back! Sign in to your VCET portal.
+              Welcome back! Sign in to your college portal.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -183,13 +184,13 @@ export function AuthForm({ redirectAfterAuth }: { redirectAfterAuth?: string }) 
                 Student: <code>23CE017</code> / <code>portal123</code>
               </p>
               <p>
-                Parent: <code>parent@vcet.edu.in</code> / <code>portal123</code>
+                Parent: <code>parent@{COLLEGE.emailDomain}</code> / <code>portal123</code>
               </p>
               <p>
-                Admin: <code>admin@vcet.edu.in</code> / <code>portal123</code>
+                Admin: <code>admin@{COLLEGE.emailDomain}</code> / <code>portal123</code>
               </p>
               <p className="mt-1 text-[11px] opacity-80">
-                Tip: student ID 23CE017 maps to 23ce017@vcet.edu.in
+                Tip: you can sign in with just your student ID — no full email needed.
               </p>
             </div>
           </div>

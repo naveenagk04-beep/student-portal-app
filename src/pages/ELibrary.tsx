@@ -30,7 +30,7 @@ export default function ELibrary() {
         <div>
           <h1 className="text-xl font-bold text-[#0F2542]">E-Library</h1>
           <p className="text-sm text-[#5B6B83]">
-            Books, journals and lecture notes from the VCET digital library.
+            Books, journals and lecture notes from the digital library.
           </p>
         </div>
 

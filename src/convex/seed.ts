@@ -4,6 +4,7 @@ import type { Id } from "./_generated/dataModel";
 import { internal } from "./_generated/api";
 import { seedData } from "./seedData";
 import { hashPasswordSync } from "./passwords";
+import { COLLEGE, LEGACY_EMAIL_DOMAIN } from "../lib/college";
 
 export const seedAll = internalMutation({
   args: {},
@@ -25,8 +26,8 @@ export const seedAll = internalMutation({
 
     // Admin account
     await ctx.db.insert("users", {
-      name: "VCET Admin",
-      email: "admin@vcet.edu.in",
+      name: "Portal Admin",
+      email: `admin@${COLLEGE.emailDomain}`,
       emailVerificationTime: Date.now(),
       role: "admin",
       portalRole: "admin",
@@ -36,7 +37,7 @@ export const seedAll = internalMutation({
     // Main student: Naveena G K
     const studentUserId = await ctx.db.insert("users", {
       name: "Naveena G K",
-      email: "23ce017@vcet.edu.in",
+      email: `23ce017@${COLLEGE.emailDomain}`,
       emailVerificationTime: Date.now(),
       role: "user",
       portalRole: "student",
@@ -58,7 +59,7 @@ export const seedAll = internalMutation({
     // Parent linked to Naveena
     const parentUserId = await ctx.db.insert("users", {
       name: "Gopalakrishnan K",
-      email: "parent@vcet.edu.in",
+      email: `parent@${COLLEGE.emailDomain}`,
       emailVerificationTime: Date.now(),
       role: "user",
       portalRole: "parent",
@@ -80,7 +81,7 @@ export const seedAll = internalMutation({
     for (const s of D.otherStudents) {
       const uid = await ctx.db.insert("users", {
         name: s.name,
-        email: `${s.rollNo.toLowerCase()}@vcet.edu.in`,
+        email: `${s.rollNo.toLowerCase()}@${COLLEGE.emailDomain}`,
         emailVerificationTime: Date.now(),
         role: "user",
         portalRole: "student",
@@ -235,7 +236,21 @@ export const ensureSeeded = mutation({
       .query("students")
       .withIndex("by_roll", (q) => q.eq("rollNo", "23CE017"))
       .first();
-    if (existing) return { ok: true, skipped: true };
+    if (existing) {
+      // One-time rebrand: move any legacy @vcet.edu.in account emails to the
+      // generic COLLEGE.emailDomain so the documented demo logins keep working.
+      const users = await ctx.db.query("users").collect();
+      const legacySuffix = `@${LEGACY_EMAIL_DOMAIN}`;
+      for (const u of users) {
+        if (u.email?.endsWith(legacySuffix)) {
+          const localPart = u.email.slice(0, -legacySuffix.length);
+          await ctx.db.patch(u._id, {
+            email: `${localPart}@${COLLEGE.emailDomain}`,
+          });
+        }
+      }
+      return { ok: true, skipped: true };
+    }
     await ctx.scheduler.runAfter(0, internal.seed.seedAll, {});
     return { ok: true, skipped: false };
   },

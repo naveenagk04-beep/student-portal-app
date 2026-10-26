@@ -132,8 +132,8 @@ export const seedData: SeedData = {
     { title: "Higher Engineering Mathematics", author: "B.S. Grewal", type: "BOOK", category: "Mathematics" },
     { title: "IEEE Transactions on Computers", author: "IEEE", type: "JOURNAL", category: "Computer Science" },
     { title: "ACM Computing Surveys", author: "ACM", type: "JOURNAL", category: "Computer Science" },
-    { title: "Data Structures Lecture Notes", author: "VCET CSE Department", type: "NOTES", category: "Computer Science" },
-    { title: "Operating Systems Handout", author: "VCET CSE Department", type: "NOTES", category: "Computer Science" },
+    { title: "Data Structures Lecture Notes", author: "CSE Department", type: "NOTES", category: "Computer Science" },
+    { title: "Operating Systems Handout", author: "CSE Department", type: "NOTES", category: "Computer Science" },
   ],
   extracurriculars: [
     { title: "Coding Club", category: "CLUB", description: "Weekly programming contests and workshops" },
@@ -143,7 +143,7 @@ export const seedData: SeedData = {
     { title: "NSS", category: "SERVICE", description: "National Service Scheme community outreach" },
     { title: "NCC", category: "SERVICE", description: "National Cadet Corps" },
     { title: "Tech Symposium Volunteer", category: "SYMPOSIUM", description: "Help organize the annual technical symposium" },
-    { title: "Quiz Team", category: "SYMPOSIUM", description: "Represent VCET at inter-college quizzes" },
+    { title: "Quiz Team", category: "SYMPOSIUM", description: "Represent your college at inter-college quizzes" },
   ],
   otherStudents: [
     { rollNo: "23CE001", name: "Aarav Kumar", year: "2", department: "CSE", program: "B.Tech Computer Science", section: "A" },

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, KeyRound, Loader2, Lock, Mail } from "lucide-react";
 import { vcetCampus } from "@/lib/vcet-assets";
+import { COLLEGE } from "@/lib/college";
 import { cn } from "@/lib/utils";
 
 export default function ForgotPassword() {
@@ -24,7 +25,7 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.title = "Forgot Password · VCET Portal";
+    document.title = `Forgot Password · ${COLLEGE.portalName}`;
   }, []);
 
   const requestResetCode = async (e: React.FormEvent) => {

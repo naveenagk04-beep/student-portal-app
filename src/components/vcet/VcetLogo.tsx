@@ -1,7 +1,8 @@
 import { vcetLogo } from "@/lib/vcet-assets";
+import { COLLEGE } from "@/lib/college";
 import { cn } from "@/lib/utils";
 
-/** Small VCET logo lockup used across the portal. */
+/** Small portal logo lockup used across the app. */
 export function VcetLogo({
   size = 40,
   light = false,
@@ -15,7 +16,7 @@ export function VcetLogo({
     <div className={cn("flex items-center gap-2.5", className)}>
       <img
         src={vcetLogo()}
-        alt="VCET logo"
+        alt="Portal logo"
         width={size}
         height={size}
         className="shrink-0 rounded-md"
@@ -27,7 +28,7 @@ export function VcetLogo({
             light ? "text-white" : "text-[#0B3B78]",
           )}
         >
-          VCET
+          {COLLEGE.shortName}
         </span>
         <span
           className={cn(
@@ -35,7 +36,7 @@ export function VcetLogo({
             light ? "text-white/70" : "text-[#5B6B83]",
           )}
         >
-          Empowering the Next Generation
+          {COLLEGE.tagline}
         </span>
       </div>
     </div>

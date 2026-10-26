@@ -42,7 +42,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* CHANGE VALUES FOR THEME — VCET modern navy palette */
+/* CHANGE VALUES FOR THEME — modern navy palette */
 :root {
   --radius: 0.75rem;
   --background: #f4f7fc;

@@ -21,7 +21,7 @@ async function sendOtpEmail(email: string, code: string) {
       body: JSON.stringify({
         to: email,
         otp: code,
-        appName: process.env.VLY_APP_NAME || "VCET Student Portal",
+        appName: process.env.VLY_APP_NAME || "Student Portal",
       }),
     });
   } catch (err) {

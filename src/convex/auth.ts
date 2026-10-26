@@ -6,11 +6,11 @@ import { verifyPasswordSync } from "./passwords";
 import { internal } from "./_generated/api";
 
 /**
- * VCET credentials provider: sign in with email OR roll number + password.
+ * Portal credentials provider: sign in with email OR roll number + password.
  * The authorize callback runs inside an ACTION context, so DB access goes
  * through ctx.runQuery / ctx.runMutation against the `account` module.
  */
-const vcetCredentials = ConvexCredentials({
+const portalCredentials = ConvexCredentials({
   id: "password",
   authorize: async (params, ctx) => {
     const rawEmail = String(params.email ?? "").toLowerCase().trim();
@@ -35,8 +35,8 @@ const vcetCredentials = ConvexCredentials({
     }
 
     // Default: sign in. Accepts a raw email or a roll number; roll numbers
-    // are mapped to their @vcet.edu.in address on the client, but we also
-    // resolve them here as a fallback.
+    // are mapped to their configured college email domain on the client, but
+    // we also resolve them here as a fallback.
     const user = await ctx.runQuery(internal.account.findByEmailOrRoll, {
       identifier: rawEmail,
     });
@@ -51,5 +51,5 @@ const vcetCredentials = ConvexCredentials({
 });
 
 export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
-  providers: [vcetCredentials, emailOtp, Anonymous],
+  providers: [portalCredentials, emailOtp, Anonymous],
 });

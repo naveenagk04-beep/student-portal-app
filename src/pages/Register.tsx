@@ -38,6 +38,7 @@ import {
   User,
 } from "lucide-react";
 import { vcetCampus, vcetLogo } from "@/lib/vcet-assets";
+import { COLLEGE } from "@/lib/college";
 
 const YEARS = ["1", "2", "3", "4"];
 const DEPARTMENTS = ["CSE", "ECE", "EEE", "MECH", "CIVIL", "IT"];
@@ -183,9 +184,9 @@ export default function Register() {
       <div className="relative z-10 mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-4 py-10">
         <div className="mb-6 text-center">
           <div className="inline-flex items-center gap-2.5 rounded-full bg-white/95 px-4 py-2 shadow-sm">
-            <img src={vcetLogo()} alt="VCET logo" className="size-8 rounded" />
+            <img src={vcetLogo()} alt="Portal logo" className="size-8 rounded" />
             <div className="text-left leading-none">
-              <span className="block text-base font-extrabold text-[#0B3B78]">VCET</span>
+              <span className="block text-base font-extrabold text-[#0B3B78]">{COLLEGE.shortName}</span>
               <span className="text-[9px] font-medium text-[#5B6B83]">
                 Empowering the Next Generation
               </span>

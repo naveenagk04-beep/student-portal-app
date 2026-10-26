@@ -41,7 +41,7 @@ const schema = defineSchema(
       emailVerificationTime: v.optional(v.number()),
       isAnonymous: v.optional(v.boolean()),
       role: v.optional(roleValidator),
-      // VCET portal fields
+      // Portal fields
       portalRole: v.optional(portalRoleValidator),
       phone: v.optional(v.string()),
       rollNo: v.optional(v.string()),

@@ -31,7 +31,7 @@ export default function Extracurricular() {
           <div>
             <h1 className="text-xl font-bold text-[#0F2542]">Extracurricular</h1>
             <p className="text-sm text-[#5B6B83]">
-              Clubs, sports and service activities at VCET.
+              Clubs, sports and service activities at your college.
             </p>
           </div>
           <div className="rounded-xl bg-[#EAF2FC] px-5 py-3">

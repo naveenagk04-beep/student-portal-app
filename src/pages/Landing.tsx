@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { vcetCampus } from "@/lib/vcet-assets";
+import { COLLEGE } from "@/lib/college";
 import { VcetLogo } from "@/components/vcet/VcetLogo";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
@@ -124,7 +125,7 @@ export default function Landing() {
             className="max-w-2xl"
           >
             <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white/90 ring-1 ring-white/20">
-              <Landmark className="size-3.5" /> Velalar College of Engineering & Technology
+              <Landmark className="size-3.5" /> Your College Campus
             </p>
             <h1 className="mt-5 text-4xl font-bold leading-tight text-white sm:text-5xl">
               Your campus, <span className="text-[#8FC3EF]">organized.</span>
@@ -134,7 +135,7 @@ export default function Landing() {
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
               One portal for attendance, assignments, exams, fees, circulars and
-              campus life — built for VCET students, parents and faculty.
+              campus life — built for students, parents and faculty.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button
@@ -180,7 +181,7 @@ export default function Landing() {
             Everything in one place
           </p>
           <h2 className="mt-2 text-3xl font-bold text-[#0F2542]">
-            Built for the full VCET journey
+            Built for the full campus journey
           </h2>
           <p className="mt-3 text-[#5B6B83]">
             From day-one registration to final-semester results — the portal
@@ -214,19 +215,18 @@ export default function Landing() {
             />
             <div className="flex flex-col justify-center p-8 md:p-10">
               <p className="text-xs font-semibold uppercase tracking-widest text-[#5BAA3C]">
-                Life at VCET
+                Life on Campus
               </p>
               <h2 className="mt-2 text-2xl font-bold text-[#0F2542] sm:text-3xl">
                 Dream. Learn. Achieve.
               </h2>
               <p className="mt-3 leading-relaxed text-[#5B6B83]">
-                Velalar College of Engineering and Technology in Erode, Tamil
-                Nadu blends rigorous academics with a vibrant campus — symposiums,
-                NSS, sports and 40+ student clubs.
+                {COLLEGE.institution} blends rigorous academics with a vibrant
+                campus — symposiums, NSS, sports and 40+ student clubs.
               </p>
               <ul className="mt-5 space-y-2.5 text-sm text-[#0F2542]">
                 {[
-                  "NAAC accredited with NBA-approved programs",
+                  "Accredited, industry-aligned academic programs",
                   "Dedicated placement training from year one",
                   "24×7 digital library and e-journal access",
                 ].map((line) => (
@@ -242,7 +242,7 @@ export default function Landing() {
                   className="rounded-lg bg-[#0B3B78] hover:bg-[#08315F]"
                 >
                   <Link to="/register">
-                    Join VCET <ArrowRight className="ml-1.5 size-4" />
+                    Join Now <ArrowRight className="ml-1.5 size-4" />
                   </Link>
                 </Button>
               </div>
@@ -281,8 +281,7 @@ export default function Landing() {
             </div>
           </div>
           <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-white/50">
-            © {new Date().getFullYear()} Velalar College of Engineering and
-            Technology, Erode · Empowering the Next Generation
+            © {new Date().getFullYear()} {COLLEGE.institution} · {COLLEGE.tagline}
           </div>
         </div>
       </footer>
